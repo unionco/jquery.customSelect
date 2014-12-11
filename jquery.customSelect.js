@@ -48,12 +48,15 @@
 
             return this.each(function () {
                 var $select = $(this),
+                    customSelectWrapper = $('<div />').addClass(getClass('Wrapper')),
                     customSelectInnerSpan = $('<span />').addClass(getClass('Inner')),
-                    customSelectSpan = $('<span />');
+                    customSelectSpan = $('<span />').addClass(prefix);
 
-                $select.after(customSelectSpan.append(customSelectInnerSpan));
-                
-                customSelectSpan.addClass(prefix);
+                $select
+                    .after(customSelectWrapper)
+                    .appendTo(customSelectWrapper)
+                    .after(customSelectSpan.append(customSelectInnerSpan))
+                    ;
 
                 if (options.mapClass) {
                     customSelectSpan.addClass($select.attr('class'));
@@ -71,10 +74,6 @@
                                 (parseInt(customSelectSpan.outerWidth(), 10) -
                                     parseInt(customSelectSpan.width(), 10));
                         
-                        // Set to inline-block before calculating outerHeight
-                        customSelectSpan.css({
-                            display: 'inline-block'
-                        });
                         
                         var selectBoxHeight = customSelectSpan.outerHeight();
 
@@ -84,18 +83,8 @@
                             customSelectSpan.removeClass(getClass('Disabled'));
                         }
 
-                        customSelectInnerSpan.css({
-                            width:   selectBoxWidth,
-                            display: 'inline-block'
-                        });
-
                         $select.css({
-                            '-webkit-appearance': 'menulist-button',
-                            width:                customSelectSpan.outerWidth(),
-                            position:             'absolute',
-                            opacity:              0,
-                            height:               selectBoxHeight,
-                            fontSize:             customSelectSpan.css('font-size')
+                            height:               selectBoxHeight
                         });
                     })
                     .on('change.customSelect', function () {
@@ -135,16 +124,10 @@
                         }
                     })
                     .on('focus.customSelect', function () {
-                        customSelectSpan.removeClass(getClass('Changed')).addClass(getClass('Focus'));
+                        customSelectSpan.removeClass(getClass('Changed'));
                     })
                     .on('blur.customSelect', function () {
-                        customSelectSpan.removeClass(getClass('Focus')+' '+getClass('Open'));
-                    })
-                    .on('mouseenter.customSelect', function () {
-                        customSelectSpan.addClass(getClass('Hover'));
-                    })
-                    .on('mouseleave.customSelect', function () {
-                        customSelectSpan.removeClass(getClass('Hover'));
+                        customSelectSpan.removeClass(getClass('Open'));
                     })
                     .trigger('render.customSelect');
             });
