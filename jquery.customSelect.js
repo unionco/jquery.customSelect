@@ -43,24 +43,20 @@
                     $(document).off('mouseup.customSelect');
                 }, 60);
             },
-            camelCase = function(str) {
-                return str.replace(/-([a-z])/gi, function(s, group1) {
+            formatClass = function(str) {
+                return options.camelCase ? str.replace(/-([a-z])/gi, function(s, group1) {
                     return group1.toUpperCase();
-                });
+                }) : str;
             },
             getClass = function(suffix){
-                var className = prefix + '-' + suffix;
-                if (options.camelCase) {
-                    className = camelCase(className);
-                }
-                return className;
+                return formatClass(prefix + '-' + suffix);
             };
 
             return this.each(function () {
                 var $select = $(this),
                     customSelectWrapper = $('<div />').addClass(getClass('wrapper')),
                     customSelectInnerSpan = $('<div />').addClass(getClass('inner')),
-                    customSelectSpan = $('<span />').addClass(prefix);
+                    customSelectSpan = $('<span />').addClass(formatClass(prefix));
 
                 $select
                     .after(customSelectWrapper)
@@ -76,7 +72,7 @@
                 }
 
                 $select
-                    .addClass(options.camelCase ? camelCase('has-' + prefix) : ('has-' + prefix))
+                    .addClass(formatClass('has-' + prefix))
                     .on('render.customSelect', function () {
                         changed($select,customSelectSpan);
                         $select.css('width','');
