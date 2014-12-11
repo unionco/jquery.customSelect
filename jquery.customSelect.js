@@ -20,7 +20,8 @@
             var defaults = {
                     customClass: 'custom-select',
                     mapClass:    true,
-                    mapStyle:    true
+                    mapStyle:    true,
+                    camelCase:   true
             },
             options = $.extend(defaults, options),
             prefix = options.customClass,
@@ -42,8 +43,17 @@
                     $(document).off('mouseup.customSelect');
                 }, 60);
             },
+            camelCase = function(str) {
+                return str.replace(/-([a-z])/gi, function(s, group1) {
+                    return group1.toUpperCase();
+                });
+            },
             getClass = function(suffix){
-                return prefix + '-' + suffix;
+                var className = prefix + '-' + suffix;
+                if (options.camelCase) {
+                    className = camelCase(className);
+                }
+                return className;
             };
 
             return this.each(function () {
@@ -66,7 +76,7 @@
                 }
 
                 $select
-                    .addClass('has-custom-select')
+                    .addClass(options.camelCase ? camelCase('has-' + prefix) : ('has-' + prefix))
                     .on('render.customSelect', function () {
                         changed($select,customSelectSpan);
                         $select.css('width','');
