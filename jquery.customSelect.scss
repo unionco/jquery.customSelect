@@ -1,0 +1,47 @@
+$custom-select: 'custom-select';
+
+.has-#{$custom-select} {
+	font-size: inherit;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	-webkit-appearance: menulist-button;
+}
+
+.#{$custom-select} {
+	//* This is the default class that is used */
+	//* Put whatever custom styles you want here */
+
+	&-wrapper {
+		display: inline-block;
+		position: relative;
+	}
+
+	.has-#{$custom-select}:hover + & {
+		//* Styles for when the select box is hovered */
+	}
+
+	&-open {
+		//* Styles for when the select box is open */
+	}
+
+	.has-#{$custom-select}:focus + & {
+		//* Styles for when the select box is in focus */
+	}
+
+	&-disabled-option {
+		//* Styles for when the selected item is a disabled one */
+	}
+
+	&-disabled {
+		//* Styles for when the select box itself is disabled */
+	}
+
+	&-inner {
+		display: block;
+		//* You can style the inner box too */
+	}
+}

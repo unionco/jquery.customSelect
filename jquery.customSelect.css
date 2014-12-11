@@ -1,8 +1,4 @@
-.customSelectWrapper {
-	position: relative;
-}
-
-.hasCustomSelect {
+.has-custom-select {
 	font-size: inherit;
 	position: absolute;
 	top: 0;
@@ -13,37 +9,37 @@
 	-webkit-appearance: menulist-button;
 }
 
-.customSelect,
-.customSelectInner  {
-	width: 100%;
-	display: inline-block;
-}
-
-.customSelect { 
+.custom-select {
 /* This is the default class that is used */
 /* Put whatever custom styles you want here */
 }
 
-.hasCustomSelect:hover + .customSelect {
+.custom-select-wrapper {
+	display: inline-block;
+	position: relative;
+}
+
+.has-custom-select:hover + .custom-select {
 /* Styles for when the select box is hovered */
 }
 
-.customSelect.customSelectOpen {
+.custom-select-open {
 /* Styles for when the select box is open */
 }
 
-.hasCustomSelect:focus + .customSelect {
+.has-custom-select:focus + .custom-select {
 /* Styles for when the select box is in focus */
 }
 
-.customSelect.customSelectDisabledOption {
+.custom-select-disabled-option {
 /* Styles for when the selected item is a disabled one */
 }
 
-.customSelect.customSelectDisabled {
+.custom-select-disabled {
 /* Styles for when the select box itself is disabled */
 }
 
-.customSelectInner {
+.custom-select-inner {
+	display: block;
 /* You can style the inner box too */
 }
